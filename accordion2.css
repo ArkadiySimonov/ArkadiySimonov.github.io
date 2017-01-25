@@ -1,0 +1,35 @@
+div.pad {
+    padding: 1px 18px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+div.accordion {
+    background-color: #ffffff;
+    color: #444;
+    cursor: pointer;
+    padding: 1px 18px;
+/*    width: 100%;*/
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+div.accordion.active, div.accordion:hover, div.panel {
+    background-color: #fffcf1;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 4px 18px;
+    overflow: hidden;
+    max-height: 500;
+    transition: 1s ease-in-out;
+}
+
+    div.panel.hidden {
+        max-height: 0;
+        background-color: white;
+/*                transition: max-height 0.5s ease-in-out;*/
+    }

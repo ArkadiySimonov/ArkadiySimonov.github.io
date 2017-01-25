@@ -6,17 +6,24 @@ h1 {
     font-family: "Slabo 27px", serif;
     font-weight: 400;
     font-size: xx-large;
+/*    line-height: 5px;*/
 }
 h2 {
     font-family: 'Slabo 27px', serif;
     font-size: x-large;
+/*    line-height: 1px;*/
 }
 h3 {
     font-family: 'Slabo 27px', serif;
+/*    line-height: 1px;*/
 }
 .container {
     max-width: 800px;
     margin: auto;
+}
+
+p.abstract {
+    font-style: italic;
 }
 
 header, footer {
