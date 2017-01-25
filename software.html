@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Slabo+27px" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>Arkadiy Simonov</title>
+        
+        <link rel="stylesheet" href="accordion2.css">
+        <script src="accordion2.js">
+        </script>
+    </head>
+    
+<body>
+    <div class="container">
+
+        <header>
+            <img src="pictures/stars%20diffuse%20scattering%206.jpg" style="max-width:800px"/>
+        </header>
+
+        <nav>
+          <ul>
+              <li><a href="index2.html">Home</a></li>
+              <li><a href="software.html">Software</a></li>
+              <li><a href="publications.html">Publications</a></li>
+              <li><a href="links.html">Links</a></li>
+          </ul>
+        </nav>
+
+        <article>
+            
+            <h1> Software </h1>
+            
+            <h2> Meerkat </h2>
+            <p>A software for reconstructing reciprocal space of the single crystal. The reconstruction is similar to the <i>unwrap</i> function of the Crysalis or similar software, except Meerkat reconstruct the whole three dimensional volume instead of two dimensional planes. Meerkat is a descendent of Xcavate software and contains a number of improvements. Firstly it allows to make reconstructions in crystallographic coordinates, secondly, due to the optimised algorithms the reconstructions are performed faster.</p>
+            
+            <p> The program is distributed as a python library. Information about the installation the source code can be found on <a href="https://github.com/aglie/meerkat">github page</a>.
+                
+            <h2> Yell </h2>
+            <p> Yell is a program for single crystal diffuse scattering refinement using the 3D-ΔPDF merhod. It allows to model all types of short range order correlations and was already successfully applied to <a href="http://scripts.iucr.org/cgi-bin/paper?pd5053">organic</a>, <a href="http://scripts.iucr.org/cgi-bin/paper?s1600576714027824">inorganic</a> and <a href="http://scripts.iucr.org/cgi-bin/paper?SN5123">complex intermetallic</a> compounds. The software features</p>
+            <ul>
+              <li>fast FFT based algorithm for diffuse scattering calculation</li>
+              <li>flexible constraint system</li>
+              <li>refinement of the average strucutre and short range order parameters</li>
+            </ul>
+            
+            <p> Since the approach works much faster than direct modelling techniques like Monte Carlo or Molecular Dynamics, we recommend to perform 3D-ΔPDF modelling before using the heavy artillery like <a href="http://discus.sourceforge.net/">DISCUS</a> or ZODS.</p>
+            <p> <a href="https://github.com/YellProgram/Yell/releases/latest">latest release</a>, 
+                <a href="https://stackedit.io/viewer#!provider=gist&gistId=ddc4388dfc94338d61a2&filename=Yell%20reference">documentation</a>, 
+                <a href="https://github.com/YellProgram/Yell">source code</a>, 
+                <a href="https://github.com/YellProgram/Yell/issues">bug tracker</a>.</p>
+            
+            <h2> Density viewer</h2>
+            <p> A tiny program for visualizing the reconstructed diffuse scattering sections and draw the 3D-ΔPDF maps.</p>
+            
+            <img src="pictures/density%20viewer.png"
+                 style="width: 100%">
+            
+            <p> <a href="https://github.com/aglie/DensityViewer/releases/latest">latest release</a>,
+                <a href="https://github.com/aglie/DensityViewer">source code</a>,
+                <a href="https://github.com/aglie/DensityViewer/issues">bug tracker</a>
+            </p>
+            
+
+            
+
+            
+          
+        </article>
+    </div>
+</body>
+</html>
