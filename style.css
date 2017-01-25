@@ -1,0 +1,59 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+/*                font-size: 9;*/
+}
+h1 {
+    font-family: "Slabo 27px", serif;
+    font-weight: 400;
+    font-size: xx-large;
+}
+h2 {
+    font-family: 'Slabo 27px', serif;
+    font-size: x-large;
+}
+h3 {
+    font-family: 'Slabo 27px', serif;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+header, footer {
+    padding: 1em;
+/*
+    color: white;
+    background-color: black;
+*/
+    clear: left;
+    text-align: center;
+}
+
+nav {
+    float: left;
+    min-width: 130px;
+    margin: 0;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    color: #bc3300;
+    text-decoration: none;
+}
+nav ul a {
+    text-decoration: none;
+}
+
+article {
+    margin-left: 100px;
+/*
+    border-left: 1px solid gray;
+    padding: 1em;
+*/
+    overflow: hidden;
+}
