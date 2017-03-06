@@ -32,7 +32,8 @@
             
             <button onclick="allWeak()">weak</button>
             <button onclick="allStrong()">strong</button>
-            <button onclick="linksOrd()">ord</button>
+            <button onclick="linksOrd()">ord1</button>
+            <button onclick="linksOrd2()">ord2</button>
             <button onclick="linksMerFac()">loc</button>
             <button onclick="randomLinks()">rand</button>
             <div style="display: flex;">
@@ -50,7 +51,11 @@
             
             Show dynamic matrix line <input type="number" value="1" id="degreeOfFreedom" max="200" onchange="drawDegreeOfFreedom(event);" min="1">
             show eigenvector <input type="number" value="1" id="eigenvectorN" max="200" onchange="draweigenvector(event);" min="1">
-            <button onclick="refreshBondsAndCalculateEigenvectors()" name="recalculate eigs">recalculate eigenvalues</button>
+            <button onclick="refreshBondsAndCalculateEigenvectors()" name="recalculate eigs">recalculate eigenvalues</button> 
+            
+                <label for="log" style="margin-left:70">log colormap</label><input type="checkbox" id="log" onchange='plotDispersionCurve();draweigenvector()' style="width: initial;"> 
+            
+            
             <h3>Force constants</h3>
 <!--            strong and weak links -->
             <div class="properties">

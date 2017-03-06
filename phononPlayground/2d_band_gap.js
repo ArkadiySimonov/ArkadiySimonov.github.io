@@ -110,6 +110,21 @@ function linksOrd() {
     updateLinkVisualizations();
     refreshBondsAndCalculateEigenvectors()
 }
+function linksOrd2() {
+    downLinks.forEach(function (row,rown) {
+        row.forEach(function (link,coln){
+            link.strong = coln % 2 === 1;
+        });
+    });
+    
+    rightLinks.forEach(function (row,rown) {
+        row.forEach(function (link,coln){
+            link.strong = (rown+coln) % 2 === 1;
+        });
+    });
+    updateLinkVisualizations();
+    refreshBondsAndCalculateEigenvectors()
+}
 
 //Generally I need to create atoms and bonds
 //but in addition to acting bonds, I will need 
@@ -346,9 +361,16 @@ function draweigenvector(e) {
     
     var t = fftProjectMode(eigenvectors[eigenvectorN]);
     
-    extractTri(t);
+    if (document.getElementById('log').checked){
+        t=map2(t,function(v) {return v>0 ? Math.log(v) : -10});
+        min=-10;
+        max=Math.log(2);
+    }else{
+        min=0;
+        max=1;
+    }
     
-    t = mat2svg(fillBorder(t),{border:'solid',borderColour:'aliceblue'});
+    t = mat2svg(fillBorder(t),{border:'solid',borderColour:'aliceblue',min:min,max:max});
     var targ=document.getElementById('ftDiv');
     if(targ.hasChildNodes())
         targ.removeChild(targ.childNodes[0]);
@@ -525,23 +547,30 @@ function reshuffle(arr,order) {
 
 var eigenvalues,eigenvectors;
 var marker;
+var dispersionCurvesHistogram;
 function moveMarker(e) {
     var t=e/marker.maxE;
     var y=marker.ymax*t+(1-t)*marker.ymin;
     marker.elem.setAttributeNS(null,'y',y)
 }
 
-function calculateDispersionCurve() {
+function plotDispersionCurve() {
     var targ=document.getElementById('dispersionCurveDiv');
     
     if(targ.hasChildNodes()){
         targ.removeChild(targ.firstChild);
     }
     
-    var vert=30;
-    var maxE=6;
-    var h = histDispersionCurves(eigenvalues, eigenvectors,vert,maxE);
-    h.reverse();
+    var h,min,max;
+    if (document.getElementById('log').checked){
+        h=map2(dispersionCurvesHistogram,function(v) {return v>0 ? Math.log(v) : -10});
+        min=-10;
+        max=Math.log(2);
+    }else{
+        h=dispersionCurvesHistogram;
+        min=0;
+        max=1;
+    }
     
     var widths=new Array(h[0].length);
     var wid=10;
@@ -554,7 +583,13 @@ function calculateDispersionCurve() {
     var heights=new Array(vert);
     heights.fill(height);
     var padding=25;
-    var drawing=mat2svg(h,{paddingx:padding,paddingy:padding,border:'none',widths:widths,heights:heights});
+    var drawing=mat2svg(h,{paddingx:padding,
+                           paddingy:padding,
+                           border:'none',
+                           widths:widths,
+                           heights:heights,
+                          min:min,
+                          max:max});
     var cw=Number(drawing.getAttributeNS(null,'width'));
     var ch=Number(drawing.getAttributeNS(null,'height'));
     drawing.appendChild(createSVGElement('rect', {x:padding,
@@ -597,6 +632,13 @@ function calculateDispersionCurve() {
     drawing.appendChild(marker.elem);
     
     targ.appendChild(drawing);
+}
+const vert=30, maxE=6;
+function calculateDispersionCurve() {
+    dispersionCurvesHistogram = histDispersionCurves(eigenvalues, eigenvectors,vert,maxE);
+    dispersionCurvesHistogram.reverse();
+    
+    plotDispersionCurve();
 }
 
 function calculateEigenvectors() {
@@ -762,6 +804,9 @@ function mat2svg(mat,options) {
     options.border = options.border || 'none';
     options.borderColour = options.borderColour || 'bisque';
     
+    options.min=options.min || 0;
+    options.max=options.max || 1;
+    
     var xpositions=cumsum([options.paddingx].concat(options.widths));
     var ypositions=cumsum([options.paddingy].concat(options.heights));
     
@@ -771,7 +816,7 @@ function mat2svg(mat,options) {
     var res = createSVGElement('svg',{width:w_res, 
                                       height:h_res,     
                                       style:`border: ${options.border}; border-color: ${options.borderColour};`});
-    var colours = pseudocolour(mat,{min:0,max:1});
+    var colours = pseudocolour(mat,{min:options.min,max:options.max});
     
     forEach2(colours, function (colour, ri, ci){
         var box = createSVGElement('rect', {x:xpositions[ci],
