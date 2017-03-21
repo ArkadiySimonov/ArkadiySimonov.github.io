@@ -1,0 +1,16 @@
+{"atoms": {"C":[0,0,"C"],
+         "N1":[ 1.5,1,"N"],
+         "N2":[-1.5,1,"N"],
+          "O":[0,-1.55,"O"]},
+
+"links":[["C","N1",1],
+         ["C","N2",1],
+         ["C","O",2]],
+
+"interactions":[["spring","C","N1",16],
+                ["spring","C","N2",16],
+                ["spring","C","O",24],
+                ["angle-spring","N1","C","O",2],
+                ["angle-spring","N2","C","O",2],
+                ["angle-spring","N1","C","N2",2]]
+}

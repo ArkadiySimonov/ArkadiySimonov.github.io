@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <style>
+            div.leftBorder {
+                 border-left: solid;
+                border-top: solid;
+                border-bottom: solid;
+                margin-right: -5px;
+                min-width: 5px;
+                 margin-left: 2px;
+                border-color: #aaaaaa;
+                border-width: 1;
+            }
+            div.rightBorder {
+                border-right: solid;
+                border-top: solid;
+                border-bottom: solid;
+                margin-left: -5px;
+                min-width: 5px;
+                margin-right: 2px;
+                border-color: #aaaaaa;
+                border-width: 1;
+            }
+            div.matrix {
+                display: flex;
+            }
+            div.eq {
+                margin-left: 5;
+                margin-right: 5;
+            }
+        </style>
+        <script src="lib/numeric-1.2.6.min.js"></script>
+    <script src="visual_matrix.js">
+        </script>
+    </head>
+        <body>
+        <div style="width:1000px;margin:auto">
+            <h1> A matrix: </h1>
+            <div style="display:flex; align-items:center;">
+                <div class="matrix" id='matrix'></div>
+                *
+            <div class="matrix" id='vector'></div>
+               <div class="eq">
+                   =
+                </div>
+             <div class="matrix" id='result'></div>
+            </div>
+
+            </div>
+    </body>
+<!--    I need a thing which is capable of drawing a matrix, a column vector,
+possibly on highlighting numbers orange
+possibly on presenting them as a+b
+by drawing a column-vector
+by making a matrix
+possibly to drag numbers
+-->
+</html>

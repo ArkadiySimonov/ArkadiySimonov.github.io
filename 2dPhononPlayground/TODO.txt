@@ -1,0 +1,14 @@
+Today I need to make a visualisation for mark's workshop. Plan
+
+1. Figure out what I want to say on the paper. It should be something along the lines of
+
+mx..=F
+x.. = -k/m x
+
+show how this is solved for one degree of freedom - an atom withing a structure.
+
+x = cos omega t
+
+x = A cos omega t + phi
+
+omega

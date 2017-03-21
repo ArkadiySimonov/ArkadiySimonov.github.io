@@ -1,0 +1,31 @@
+div.leftBorder {
+    border-left: solid;
+    border-top: solid;
+    border-bottom: solid;
+    margin-right: -5px;
+    min-width: 5px;
+    margin-left: 2px;
+    border-color: #aaaaaa;
+    border-width: 2;
+}
+div.rightBorder {
+    border-right: solid;
+    border-top: solid;
+    border-bottom: solid;
+    margin-left: -5px;
+    min-width: 5px;
+    margin-right: 2px;
+    border-color: #aaaaaa;
+    border-width: 2;
+}
+div.matrix {
+    display: flex;
+}
+div.eq {
+    margin-left: 5;
+    margin-right: 5;
+}
+table {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}

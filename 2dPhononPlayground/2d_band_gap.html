@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <script src="lib/numeric-1.2.6.min.js"></script>
+        <script src="2d_band_gap.js"></script>
+        <style>
+            div.aroundProperty {
+                display: flex;
+                align-items: center;
+            }
+            div.properties {
+                display: flex;
+            }
+
+            input {
+                border: none;
+                font-family:inherit;
+                font-size: inherit;
+                width: 70;
+
+            }
+            .interactions {
+                padding-right: 6;
+            }
+
+            line {
+                transition: stroke 0.25s;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="width:1000px;margin:auto">
+            <h1> 2D phonon playground </h1>
+
+            <button onclick="allWeak()">weak</button>
+            <button onclick="allStrong()">strong</button>
+            <button onclick="linksOrd()">ord</button>
+            <button onclick="linksMerFac()">loc</button>
+            <button onclick="randomLinks()">rand</button>
+            <div style="display: flex;">
+                <svg width="505" height="505"  id="crystalStructure">
+
+                </svg>
+                <div>
+                    <div id="ftDiv" style="padding-left:25;"></div>
+                    <div id="dispersionCurveDiv"></div>
+
+                </div>
+
+
+            </div>
+
+            Show dynamic matrix line <input type="number" value="1" id="degreeOfFreedom" max="200" onchange="drawDegreeOfFreedom(event);" min="1">
+            show eigenvector <input type="number" value="1" id="eigenvectorN" max="200" onchange="draweigenvector(event);" min="1">
+            <button onclick="refreshBondsAndCalculateEigenvectors()" name="recalculate eigs">recalculate eigenvalues</button>
+            <h3>Force constants</h3>
+<!--            strong and weak links -->
+            <div class="properties">
+                <div class="propertyGroup">
+                    <div class="aroundProperty">
+                    <svg width="50" height='10' class='interactions'>
+                        <line x1="13" x2="37" y1="5" y2="5" stroke="black" stroke-width="2"></line>
+                        <circle cx="5" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <circle cx="45" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                    </svg>
+
+                    k=<input type="number" value="1.2" id="strongBond"  step="0.02">
+                    </div>
+
+                    <br>
+                    <div class="aroundProperty" >
+                    <svg width="50" height='10' class='interactions'>
+                        <line x1="13" x2="37" y1="5" y2="5" stroke='#c1c1c1' stroke-width="2"></line>
+                        <circle cx="5" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <circle cx="45" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                    </svg>
+
+                    k=<input type="number" value="0.6" id="weakBond"  step="0.1">
+
+
+                    </div>
+                </div>
+
+                <div class="propertyGroup">
+                    <div class="aroundProperty">
+                    <svg width="37" height='37' class='interactions'>
+                        <line x1="13" x2="37" y1="5" y2="5" stroke='#c1c1c1' stroke-width="2"></line>
+                        <line x1="5" x2="5" y1="13" y2="37" stroke='#c1c1c1' stroke-width="2"></line>
+                        <circle cx="5" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M25,5 a18,18 0 0,1 -20,20" stroke='black' fill='none'></path>
+                    </svg>
+
+                    k=<input type="number" value="0.04" id="weakSmallAngle" step="0.02">
+                    </div>
+                    <br>
+                    <div class="aroundProperty">
+                    <svg width="37" height='37' class='interactions'>
+                        <line x1="13" x2="37" y1="5" y2="5" stroke='black' stroke-width="2"></line>
+                        <line x1="5" x2="5" y1="13" y2="37" stroke='#c1c1c1' stroke-width="2"></line>
+                        <circle cx="5" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M25,5 a18,18 0 0,1 -20,20" stroke='black' fill='none'></path>
+                    </svg>
+                        k=<input type="number" value="0.04" id="mediumSmallAngle"  step="0.02">
+                    </div>
+
+
+                    <br>
+                    <div class="aroundProperty">
+                    <svg width="37" height='37' class='interactions' >
+                        <line x1="13" x2="37" y1="5" y2="5" stroke='black' stroke-width="2"></line>
+                        <line x1="5" x2="5" y1="13" y2="37" stroke='black' stroke-width="2"></line>
+                        <circle cx="5" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M25,5 a18,18 0 0,1 -20,20" stroke='black' fill='none'></path>
+                    </svg>
+                        k=<input type="number" value="0.04" id="strongSmallAngle"  step="0.02">
+                    </div>
+                </div>
+
+
+
+
+                <div class="propertyGroup">
+                    <div class="aroundProperty">
+                    <svg width="64" height='26' class='interactions'>
+                        <line x1="40" x2="64" y1="5" y2="5" stroke='#c1c1c1' stroke-width="2"></line>
+                        <line x1="25" x2="0" y1="5" y2="5" stroke='#c1c1c1' stroke-width="2"></line>
+                        <circle cx="32" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M52,5 a20,20 0 0,1 -40,00" stroke='black' fill='none'></path>
+                    </svg>
+                        k=<input type="number" value="0.04" id="weakLargeAngle"  step="0.02">
+                    </div>
+
+
+                    <br>
+                    <div class="aroundProperty">
+                    <svg width="64" height='26' class='interactions'>
+                        <line x1="40" x2="64" y1="5" y2="5" stroke='#c1c1c1' stroke-width="2"></line>
+                        <line x1="25" x2="0" y1="5" y2="5" stroke='black' stroke-width="2"></line>
+                        <circle cx="32" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M52,5 a20,20 0 0,1 -40,00" stroke='black' fill='none'></path>
+                    </svg>
+
+                    k=<input type="number" value="0.04" id="mediumLargeAngle"  step="0.02">
+                    </div>
+
+                    <br>
+                    <div class="aroundProperty">
+                    <svg width="64" height='26' class='interactions'>
+                        <line x1="40" x2="64" y1="5" y2="5" stroke='black' stroke-width="2"></line>
+                        <line x1="25" x2="0" y1="5" y2="5" stroke='black' stroke-width="2"></line>
+                        <circle cx="32" cy="5" r="5" fill="#a1a1ff" stroke="none"></circle>
+                        <path d="M52,5 a20,20 0 0,1 -40,00" stroke='black' fill='none'></path>
+                    </svg>
+
+                    k=<input type="number" value="0.04" id="strongLargeAngle"  step="0.02">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

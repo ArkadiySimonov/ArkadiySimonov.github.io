@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <script src="lib/numeric-1.2.6.min.js"></script>
+        <script src="vibrations.js"></script>
+        <script src="visual_matrix.js"></script>
+        <link rel="stylesheet"  type="text/css" href="visual_matrix.css">
+        <style>
+            table {
+                display: block;
+            }
+            table.hidden {
+                display:none;
+            }
+            div.hidden {
+                display:none;
+            }
+            div.matrixEquation {
+                display:flex;
+                align-items:center;
+            }
+
+            div.aroundProperty {
+                display: flex;
+                align-items: center;
+            }
+            div.properties {
+                display: flex;
+            }
+            div.buttonRow {
+                display: flex;
+                flex-direction: column;
+            }
+
+            input {
+                border: none;
+                font-family:inherit;
+                font-size: inherit;
+
+
+            }
+            table.savedVector {
+                min-width: 21;
+            }
+            .interactions {
+                padding-right: 6;
+            }
+
+            line {
+                transition: stroke 0.25s;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="width:1000px;margin:auto">
+            <h1> 2D phonon playground </h1>
+
+
+                <svg width="600" height="400"  id="structure">
+
+                </svg>
+
+                <div style="display:flex; align-items:center;">
+                    –
+
+                    <div class="matrix" id='matrix'></div>
+                    *
+                    <div class="matrix">
+                        <div class="leftBorder"></div>
+<!--                        <table id='probeOtherVectors'></table>-->
+                        <table id='probe'></table>
+                        <div class='rightBorder'></div>
+                    </div>
+
+                    <button style="align-self: flex-start;" onclick="addAnotherVector()">+</button>
+                    <div class="eq">
+                    =
+                    </div>
+                    <div class="matrix" id='result'></div>
+                    <div class="matrix" id='hint'></div>
+                    <div style="align-self: flex-start;">
+                        <div>
+                            <input type="checkbox" id="liveUpdateForces"  onclick="freezeResponse()" checked>
+  live
+                        </div>
+                        <button style="align-self: flex-start;" onclick="normaliseForces()">norm</button>
+</div>
+
+                  </div>
+
+            <h2>Found vectors:</h2>
+
+            <table id='foundVectors' class='hidden'>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div style="display:flex; flex-direction:row; justify-content:space-around;" id='buttonsOverSavedVectors'>
+
+                        </div>
+
+                    </td>
+                <td></td>
+
+                </tr>
+                <tr>
+                    <td>
+                    <div class='matrixEquation' >
+                    –
+                    <div class="matrix" id='matrix2'></div>
+                    *
+
+                  </div>
+
+                    </td>
+                    <td>
+                        <div style="display:flex; flex-direction:column">
+
+                        <div class="matrix">
+
+                            <div class="leftBorder"></div>
+                            <div class='matrix' id='probeOtherVectors'>
+
+                            </div>
+                            <div class='rightBorder'></div>
+                        </div>
+                    </div>
+
+
+                    </td>
+                    <td>
+                        <div class='matrixEquation' id='foundVectors'>
+                    <div class="eq">
+                    =
+                    </div>
+                    <div class="matrix" id='forcesOtherVectors'></div>
+                        </div>
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <button onclick="diagonalise()">diagonalise</button>
+            <button onclick="hideDiag()">hide</button>
+            <div id='diagonalisedSection' class='hidden'>
+                <h2> Diagonalised matrix: </h2>
+                <div style="display:flex; align-items:center;">
+                        –
+                        <div class="matrix" id='U'></div>
+                        <div class="matrix" id='matrix3'></div>
+                        <div class="matrix" id='V'></div>
+
+                        <div class="eq">
+                        =
+                        </div>
+
+                        <div class="matrix" id='diagonalisedMatrix'></div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
