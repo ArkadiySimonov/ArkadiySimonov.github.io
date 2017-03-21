@@ -407,12 +407,17 @@ function unhighlightVector(targ, n) {
     }
 }
 
+function stopPropagation(e) {
+    console.log('prevent?');
+    e.stopPropagation();
+}
+
 function uploadVector(vn) {
     return function(e) {
+        e.preventDefault();
         probe = numeric.transpose([otherVectors[vn]]);
         updateAll();
     }
-
 }
 
 function updateAll() {
@@ -455,6 +460,7 @@ function updateMatrixRepresentation() {
             otherVectorTarg.appendChild(tab);
             tab.addEventListener('mouseover', highlightVector(tab, vn));
             tab.addEventListener('click', uploadVector(vn));
+            tab.addEventListener('mouseup',stopPropagation);
             tab.addEventListener('mouseout', unhighlightVector(tab, vn));
             tab.classList = ['savedVector'];
         });
@@ -560,6 +566,7 @@ function projectToSubspace(arr,subspace) {
 }
 
 function snapToClosestSolution(proximity) {
+    console.log('snap');
     proximity = proximity || -1;
 
     var candidate = normalise(numeric.transpose(probe)[0]);
@@ -596,27 +603,15 @@ function snapToClosestSolution(proximity) {
         if(howFar > proximity) {
             var res = normalise(projections[maxProjectionN]);
             probe = numeric.transpose([res]);
-            updateMatrixRepresentation();
+
             document.getElementById('liveUpdateForces').checked = true;
-            updateForceArrows();
-            updateProbeArrows();
+            updateAll();
         }else {
             console.log('this far ' + howFar);
             console.log(numeric.prettyPrint(prjectionNorms));
         }
 
     }
-
-
-
-//    numeric.dot(eigenvectors,numeric.transpose(eigenvectors))
-
-//    var t=numeric.svd(dynamicMatrix);
-//    eigenvalues=t.S;
-//    eigenvalues.reverse();
-//    eigenvectors=numeric.transpose(t.V);
-//    eigenvectors.reverse();
-
 }
 
 function needToUpdateForces() {
@@ -749,7 +744,7 @@ function setupModel(text) {
     updateForceArrows();
     updateProbeArrows();
 
-    window.addEventListener('mouseup',function() {snapToClosestSolution(0.99)});
+    window.addEventListener('mouseup',function() {snapToClosestSolution(0.95)});
 
     //add color highlight when close to solution
     //diagonalize matrix, show how it works.
