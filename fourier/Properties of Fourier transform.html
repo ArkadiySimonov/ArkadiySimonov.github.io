@@ -1,0 +1,273 @@
+<html>
+    <head>
+        
+        <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Cutive|Raleway|Open+Sans" rel="stylesheet">
+        <style>
+            h1 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h2 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h3 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            .wrapper {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            div.fftImages {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            div.large {
+                font-size: 100;
+                display: flex;
+                align-items: center;
+            }
+            
+            div {
+                font-family: 'Open Sans', sans-serif;
+            }
+            
+            img {
+                border-style: solid;
+                border-color: #e6e6e6;
+                border-width: 1;
+/*                //width:768;*/
+                image-rendering: pixelated;
+            }
+            ul {
+  list-style-position: outside;
+}
+        </style>
+    </head>
+    <body>
+        
+<!--
+        
+        // wrap-around
+// moving, moving behind the rectangle
+// gaussian imortant - page 39 pedestrians
+// lorentzian?? lorentzian 3d?
+// abc - add the stuff as pngs
+//parseval equation
+//rectangle
+//integral in the centre is just the integral of all electron density
+//HTMLMediaElement.srcObject
+
+// refer to https://see.stanford.edu/materials/lsoftaee261/chap8.pdf
+-->
+
+        <div class="wrapper">
+        <h1>
+            Properties of Fourier transform
+        </h1>
+            In the context of crystallography Fourier transform allows to calculate scattering structure factor \(F(\mathbf h)\) from structure electron density \(\rho(x)\):
+            
+            $$F(\mathbf h) = \operatorname{FT}[\rho(\mathbf r)] = \int \rho(\mathbf r)e^{2\pi i \mathbf{rh}}d\mathbf r$$
+            
+            Fourier transform is invertible, and thus electron density can be calculated if one knows the structure factors along with their <i>phases</i>:
+            
+            $$\rho(\mathbf r)=\int F(\mathbf h) e^{-2\pi i \mathbf{rh}} d\mathbf h$$
+            
+            In crystals electron density is periodic, and is calculated using Fourier summation:
+            
+            $$\rho(\mathbf r) = \sum_{hkl} F(hkl) e^{-2\pi i \mathbf{rh}}$$
+            
+            In this file you will find the most important properties of Fourier tansform and gif files showing them visually.
+            
+            
+            <h2> A couple of special functions </h2> 
+            
+            
+            <table>
+                <tr>
+                    <td>Delta function &emsp;</td>
+                    <td>$$\operatorname{FT}[\delta(\mathbf r)]=1$$</td>
+                </tr>
+                
+                <tr>
+                    <td>Gaussian</td>
+                    <td>$$\operatorname{FT}[e^{-\pi r^2}] = e^{-\pi s^2}$$</td>
+                </tr>
+                
+                <tr>
+                    <td>Rectangle</td>
+                    <td>$$\displaystyle \operatorname{FT}[\operatorname {rect} (ax)] =   {\frac {1}{|a|}} \operatorname {sinc} \left({\frac {h }{a}}\right)$$</td>
+                </tr> 
+            </table>
+
+            <h2> List of properties</h2>
+            
+            <table>
+                <tr>
+                    <td>Linearity  &emsp;</td>
+                    <td>$$\operatorname{FT}[\alpha \rho_1(\mathbf r)+\beta \rho_2(\mathbf r)]=\alpha \operatorname{FT}[ \rho_1(\mathbf r)]+\beta \operatorname{FT}[\rho_2(\mathbf r)]$$</td>
+                </tr>
+                <tr>
+                    <td> Integration &emsp;</td>
+                    <td>$$F(\mathbf 0)=\int \rho(\mathbf r)d\mathbf r $$</td>
+                </tr>
+                <tr>
+                    <td>Inversion  &emsp;</td>
+                    <td>$$ \operatorname{FT}[\rho(-\mathbf r)]=\operatorname{FT}[\rho(\mathbf r)]^*$$</td>
+                </tr>
+                <tr>
+                    <td> Scaling &emsp;</td>
+                    <td>$$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf s}{\alpha}) $$</td>
+                </tr>
+                <tr>
+                    <td>Translation  &emsp;</td>
+                    <td>$$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{s r}_0}$$</td>
+                </tr>
+                <tr>
+                    <td> Rotation &emsp;</td>
+                    <td>$$\operatorname{FT}[\rho(R \mathbf r)]=F(R^T\mathbf h)$$</td>
+                </tr>
+                <tr>
+                    <td>Convolution  &emsp;</td>
+                    <td> $$\operatorname{FT}[F_1(\mathbf h)  F_2(\mathbf h)]=\rho_1(\mathbf r) \ast \rho_2(\mathbf r)$$</td>
+                </tr>
+                <tr>
+                    <td> Projection-cut &emsp;</td>
+                    <td>$$F(hk0) = FT_{2D}\left[\int \rho(x,y,z) dz\right]$$</td>
+                </tr>
+                <tr>
+                    <td> Parseval equation &emsp;</td>
+                    <td>$$\int F^2(\mathbf s)d\mathbf s = \int \rho^2(\mathbf r)d\mathbf r$$</td>
+                </tr>
+                <tr>
+                    <td>Evenness  &emsp;</td>
+                    <td>$$\text{if  } \rho(\mathbf r)=\rho(-\mathbf r) \text{,  then  } F(\mathbf s)=\operatorname{Re}[F(\mathbf s)]$$</td>
+                </tr>
+                
+                            
+            </table>
+            
+            
+            <h2>Fourier transform abc</h2>
+            </div>
+        <div class="fftImages">
+            <img src="images/letter%20a.png">
+            <img src="images/ft%20a.png">
+        </div>
+        <div class="fftImages">
+            <img src="images/letter%20b.png">
+            <img src="images/ft%20b.png">
+        </div>
+        <div class="fftImages">
+            <img src="images/letter%20c.png">
+            <img src="images/ft%20c.png">
+        </div>
+        <div class="fftImages">
+            <img src="images/letter%20g.png">
+            <img src="images/ft%20g.png">
+        </div>
+        <div class="fftImages">
+            <img src="images/letter%20v.png">
+            <img src="images/ft%20v.png">
+        </div>
+            
+        <div class='wrapper'>    
+        <h2> Inversion</h2>
+            $$ \operatorname{FT}[\rho(-\mathbf r)]=\operatorname{FT}[\rho(\mathbf r)]^*$$
+        </div>
+        <div class="fftImages">
+            <img src="images/flipping_triangle.gif"/>
+            <img src="images/flipping_triangle_fft.gif"/>
+        </div>
+        <div class='wrapper'>
+        <h2> Scaling </h2>
+            $$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf s}{\alpha}) $$
+        </div>
+        <div class="fftImages">
+            <img src="images/oscillating_circle.gif"/>
+            <img src="images/oscillating_circle_fft.gif"/>
+        </div>
+        <div class="wrapper">
+        <h2> Rotation </h2>
+            $$\operatorname{FT}[\rho(R \mathbf r)]=F(R^T\mathbf h)$$
+        </div>
+        
+        <div class='fftImages'>
+            <img src="images/rocking_square.gif"/>
+        <img src="images/rocking_square_fft.gif"/>
+        </div>
+            <div class="wrapper">
+        <h2> Translation </h2>
+                $$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{s r}_0}$$
+            </div>
+        <div class="fftImages">
+            <img src="images/moving_rect_small.gif"/>
+            <img src="images/moving_rect_fft_small.gif"/>
+        </div>
+        <div class="fftImages">
+            <img src="images/moving_point.gif"/>
+            <img src="images/moving_point_fft.gif"/>
+        </div>
+            <div class="wrapper">
+        <h2> Convolution </h2>
+                $$\operatorname{FT}[F_1(\mathbf h)  F_2(\mathbf h)]=\rho_1(\mathbf r) \ast \rho_2(\mathbf r)$$
+            </div>
+        <div class="large">
+            <img src="images/lattice.png"/> × 
+            <img src="images/large_square.png"/> = 
+            <img src="images/tiny_lattice.png"/>
+            
+        </div>
+        <div class="large">
+            <img src="images/lattice_fft.png"/> ∗
+            <img src="images/large_square_fft.png"/> =
+            <img src="images/tiny_lattice_fft.png"/>
+        </div>
+        <div class="wrapper">
+        <h2> Convolution with gaussian</h2>
+        </div>
+        <div class="large">
+            <img src="images/lattice.png"/>×
+            <img src="images/gaussian.png"/> =
+            <img src="images/gauss_lattice.png"/>
+        </div>
+        <div class="large">
+            <img src="images/lattice_fft.png"/> ∗
+            <img src="images/gaussian_fft.png"/> =
+            <img src="images/gauss_lattice_fft.png"/>
+        </div>
+        
+        <div class="wrapper">
+        <h2>Crystal unit cell</h2>
+            </div>
+        <div class="large">
+            <img src="images/gauss_lattice.png"/> ∗
+            <img src="images/triangle.png"/> =
+            <img src="images/triangle_lattice.png"/>
+        </div>
+        <div class="large">
+            <img src="images/gauss_lattice_fft.png"/> ×
+            <img src="images/triangle_fft.png"/> =
+            <img src="images/triangle_lattice_fft.png"/>
+        </div>
+            
+            
+            
+       
+        
+        
+    </body>
+</html>
+
+<!--
+Upload all somewhere
+facebook group
+group link
+a couple of words under each formula??
+Get a duck image, and a fuzzy duck??????
+fft camera - upload
+if time permits, make also the image converter. bah, too short now
+-->

@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../lib/husl.min.js"></script>
+        <script src="../lib/complex_array.js"></script>
+        <script src="../lib/fft.js"></script>
+        <script src="../lib/fft_image.js"></script>
+        <script src="ft_lib.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cutive|Raleway|Open+Sans" rel="stylesheet">
+        
+        <style>
+             h1 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h2 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h3 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            .wrapper {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .vars{
+    display: flex;
+    flex-direction: row;           
+            }
+            .hidden{
+                display:none;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+    <h1>Fourier transform game</h1>
+        <div>
+            <div class='vars'>
+                <canvas width='256' height='256' id='task'></canvas>
+                <canvas width='256' height="256" id='solution' class='hidden'></canvas>
+            </div>
+            
+            <div id='variants' class="vars">
+            
+                <div class="var-wrap" onclick='guess(0);'><canvas width='85' height='85'></canvas></div>
+                <div class="var-wrap" onclick='guess(1);'><canvas width='85' height='85'></canvas></div> 
+                <div class="var-wrap" onclick='guess(2);'><canvas width='85' height='85'></canvas></div>
+
+            </div>
+            <button onclick="runGame();">next</button>
+            <div id='score'></div>
+        </div>
+        </div>
+
+<!--        TODO: later reduce to 64 pixels-->
+    
+        <script src=abc_game.js></script>
+    </body>
+</html>
