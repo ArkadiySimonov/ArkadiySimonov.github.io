@@ -94,7 +94,7 @@
                 
                 <tr>
                     <td>Gaussian</td>
-                    <td>$$\operatorname{FT}[e^{-\pi r^2}] = e^{-\pi s^2}$$</td>
+                    <td>$$\operatorname{FT}[e^{-\pi r^2}] = e^{-\pi h^2}$$</td>
                 </tr>
                 
                 <tr>
@@ -120,11 +120,11 @@
                 </tr>
                 <tr>
                     <td> Scaling &emsp;</td>
-                    <td>$$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf s}{\alpha}) $$</td>
+                    <td>$$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf h}{\alpha}) $$</td>
                 </tr>
                 <tr>
                     <td>Translation  &emsp;</td>
-                    <td>$$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{s r}_0}$$</td>
+                    <td>$$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{h r}_0}$$</td>
                 </tr>
                 <tr>
                     <td> Rotation &emsp;</td>
@@ -140,11 +140,11 @@
                 </tr>
                 <tr>
                     <td> Parseval equation &emsp;</td>
-                    <td>$$\int F^2(\mathbf s)d\mathbf s = \int \rho^2(\mathbf r)d\mathbf r$$</td>
+                    <td>$$\int F^2(\mathbf h)d\mathbf h = \int \rho^2(\mathbf r)d\mathbf r$$</td>
                 </tr>
                 <tr>
                     <td>Evenness  &emsp;</td>
-                    <td>$$\text{if  } \rho(\mathbf r)=\rho(-\mathbf r) \text{,  then  } F(\mathbf s)=\operatorname{Re}[F(\mathbf s)]$$</td>
+                    <td>$$\text{if  } \rho(\mathbf r)=\rho(-\mathbf r) \text{,  then  } F(\mathbf h)=\operatorname{Re}[F(\mathbf h)]$$</td>
                 </tr>
                 
                             
@@ -184,7 +184,7 @@
         </div>
         <div class='wrapper'>
         <h2> Scaling </h2>
-            $$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf s}{\alpha}) $$
+            $$ \operatorname{FT}[\rho(\alpha \mathbf r)]=\frac{1}{\alpha ^3}F(\frac{\mathbf h}{\alpha}) $$
         </div>
         <div class="fftImages">
             <img src="images/oscillating_circle.gif"/>
@@ -201,7 +201,7 @@
         </div>
             <div class="wrapper">
         <h2> Translation </h2>
-                $$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{s r}_0}$$
+                $$\operatorname{FT}[\rho(\mathbf r + \mathbf r_0)]= F(\mathbf h)e^{2\pi i \mathbf{h r}_0}$$
             </div>
         <div class="fftImages">
             <img src="images/moving_rect_small.gif"/>

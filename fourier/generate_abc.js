@@ -5,6 +5,12 @@ window.onload = function() {
     for(var i=0; i<letters.length; ++i)
         addLetter(letter_targ, letters[i]);
     
+//    <a onclick="saveAll();" href="#">Save all</a>
+    
+    var a = document.createElement('button');
+    a.addEventListener('click',saveAll);
+    a.textContent="Save all";
+    document.getElementById('wrapper').appendChild(a);
     
     console.log('done');
 }
@@ -13,7 +19,7 @@ window.onload = function() {
 function addLetter(target, letter) {
     var tr=document.createElement('tr');
     var width=256;
-    tr.innerHTML=`<th><canvas id="targ" width="${width}" height="${width}"></canvas></th><th><canvas id="transform" width="${width}" height="${width}"></canvas></th>`;
+    tr.innerHTML=`<th><canvas id="${letter}_im" width="${width}" height="${width}"></canvas></th><th><canvas id="${letter}_ft" width="${width}" height="${width}"></canvas></th>`;
     
     target.appendChild(tr);
     var ctx_letter = tr.childNodes[0].childNodes[0].getContext('2d');
@@ -36,4 +42,27 @@ function drawLetter(ctx, letter, sz) {
     ctx.textBaseline='middle';
     ctx.font = `${sz}px serif`;
     ctx.fillText(letter, 0, 0)
+}
+
+function saveAll() {
+    
+    var canvases = document.getElementsByTagName('canvas');
+    var i=0;
+    function saveOne() {
+        if(i<canvases.length){
+            var cnv = canvases[i];
+        
+            var dataURL = cnv.toDataURL('image/png');
+
+            var a = document.createElement('a');
+            a.setAttribute('download',cnv.getAttribute('id')+'.png');
+            a.href = dataURL;
+            a.click();
+            
+            ++i;
+            setTimeout(saveOne, 200);
+        }
+    }
+    saveOne();
+
 }
