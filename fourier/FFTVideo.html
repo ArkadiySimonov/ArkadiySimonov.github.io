@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <script type="text/javascript" src="lib/husl.min.js"></script>
+        <script src="lib/complex_array.js"></script>
+        <script src="lib/fft.js"></script>
+        <script src="lib/fft_image.js"></script>
+        <script src="ft_lib.js"></script>
+        <script src="video_capture.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cutive|Raleway|Open+Sans" rel="stylesheet">
+        <style>
+            h1 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h2 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            h3 {
+                font-family: 'Cutive', serif;
+                font-weight: normal;
+            }
+            .wrapper {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            div.fftImages {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            div.large {
+                font-size: 100;
+                display: flex;
+                align-items: center;
+            }
+            
+            div {
+                font-family: 'Open Sans', sans-serif;
+            }
+            
+            img {
+                border-style: solid;
+                border-color: #e6e6e6;
+                border-width: 1;
+/*                //width:768;*/
+                image-rendering: pixelated;
+            }
+            .pixelated {
+
+                image-rendering: pixelated;
+            }
+            ul {
+              list-style-position: outside;
+            }
+            .hide{
+                display: none;
+            }
+        
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <h1>FFT Camera</h1>
+            <canvas width='256' height="256" id="VideoCanvas" class="pixelated"></canvas>
+            <canvas width='256' height="256" id="VideoFFTCanvas" class="pixelated"></canvas>
+            
+            <br>
+            <button onclick="startFFT();" id="startFFT">Start FT</button>
+            <button onclick="pause();" class='hide' id="pauseFFT">Pause</button>
+            &emsp;  Saturation <input type="number" value="70" onchange="updateSaturation(event)">
+        </div>
+        
+        <script>
+        
+        var params={};
+        function startFFT() {
+            params = setupCamera(document.getElementById('VideoCanvas'),
+                        document.getElementById('VideoFFTCanvas'));
+            document.getElementById('startFFT').classList.add('hide');
+            document.getElementById('pauseFFT').classList.remove('hide');
+        }
+            function updateSaturation(e) {
+                console.log(params.saturation);
+                params.saturation=Number(e.target.value);
+                console.log(params.saturation);
+            }
+        
+        </script>
+    </body>
+</html>
