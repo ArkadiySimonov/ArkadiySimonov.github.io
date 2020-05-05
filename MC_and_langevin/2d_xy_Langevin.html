@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <script src="2d_xy_Langevin.js"></script>
+        <script src="lib/numeric.js"></script>
+        <script src="2d_xy_draw_section.js"></script>
+        <style>
+            input {
+                width: 40pt;
+            }
+        </style>
+<!--
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+-->
+    </head>
+    <body>
+        <h1>Ising xy model Langevin</h1>
+        
+        <div style="display: flex;"> 
+            <svg id="structure" width="600" height="600"></svg>
+        
+
+        <div> 
+            <p>Run simulation</p> 
+            <p>
+                Temperature = <input id="T" type="number" value="0.1" step="0.1"/>
+            </p>
+            <p>
+                Visualize every <input id="visualizeEveryInp" type="number" value="10"/> iterations
+            </p>
+            <p>
+                Time between frames <input id="delayInp" type="number" value="10"/> ms
+            </p>
+            <p>
+                Timestap h = <input id="hInp" type="number" value="0.025" step="0.01"/> 
+            </p>
+            
+            <p> <button onclick="runOptimizationVisual();">▶</button><button onclick="stopOptimizationVisual()">■</button></p>
+        
+            <p><div id="optimizationSteps"> </div></p>
+            <p><button onclick="randomizeConfiguration();">randomize configuration</button></p>
+            <p>System size= <input id="NInp" value="40" onchange="initialize();"/> </p>
+        
+        </div>
+        </div>
+    
+    </body>
+</html>
